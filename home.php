@@ -1,4 +1,30 @@
 <?php session_start(); // début de la session ?>
+
+<?php
+try{
+$database = new PDO('mysql:host=localhost;dbname=we_love_food;charset=utf8',    //Data Source Name
+            'root', //Identifiant
+            '',  //mot de passe
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+);}
+
+catch (Exception $e)
+
+{
+    die('Erreur : '. $e->getMessage());
+}
+
+// On récupère tout le contenu de la table recipes
+$recipesStatement = $database->prepare('SELECT * FROM recipes');
+$recipesStatement->execute();
+$recipes = $recipesStatement->fetchAll();
+
+// On récupère le contenu de la table Users
+$usersdb = $database->prepare('SELECT * FROM users');
+$usersdb->execute();
+$users = $usersdb->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,15 +46,14 @@
         <h1>Site de recettes</h1>
 
         
-        <!-- inclusion des variables et fonctions -->
+        <!-- inclusion des fonctions -->
             <?php
-                include_once('variables.php');
                 include_once('functions.php');
             ?>
 
             <!-- inclusion de l'entête du site -->
             <?php include_once('header.php'); ?>
-        
+            <!-- Affichage des recettes si user est logged -->
             <?php if(isset($_SESSION['LOGGED_USER'])) : ?>
                
                <?php foreach(getRecipes($recipes) as $recipe) : ?>

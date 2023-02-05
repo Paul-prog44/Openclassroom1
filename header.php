@@ -1,5 +1,4 @@
 <?php
-    include_once('variables.php');
     include_once('functions.php');
 ?>
 
@@ -16,6 +15,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="contact.php">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="create.php">Ajouter une recette</a>
         </li>
       </ul>
     </div>

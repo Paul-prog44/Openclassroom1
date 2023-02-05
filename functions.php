@@ -15,7 +15,7 @@ function display_recipe(array $recipe) : string
     return $recipe_content;
 }
 
-function displayAuthor(string $authorEmail, array $users) : string
+function displayAuthor(string $authorEmail, array $users)
 {
     for ($i = 0; $i < count($users); $i++) {
         $author = $users[$i];
