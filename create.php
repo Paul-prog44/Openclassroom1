@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +18,12 @@
     <div class="container">
 
     <?php include_once('header.php'); ?>
+
+    <?php if(empty($_SESSION['LOGGED_USER'])): ?>
+        <h1>Vous devez vous enregistrer pour poster une recette.</h1>
+       <?php include_once('login.php');?>
+        
+    <?php else: ?>
         <h1>Ajouter une recette</h1>
         <form action="post_create.php" method="POST">
             <div class="mb-3">
@@ -29,6 +39,9 @@
         </form>
         <br />
     </div>
+    <?php endif; ?>
+    
+    
 
     
 

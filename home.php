@@ -61,6 +61,12 @@ $users = $usersdb->fetchAll();
                     <h3><?php echo $recipe['title']; ?></h3>
                    <div><?php echo $recipe['recipe']; ?></div>
                    <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
+                   <div>
+                   <form action="submit_contact.php" method="POST">
+                   <button type="button" class="btn btn-light">Modifier</button> 
+                   <button type="button" class="btn btn-danger">Supprimer</button> 
+                    </form>
+                    </div>
                </article> 
                <?php endforeach ?>
         <?php endif; ?>
