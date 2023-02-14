@@ -51,8 +51,7 @@ $users = $usersdb->fetchAll();
                 include_once('functions.php');
             ?>
 
-            <!-- inclusion de l'entête du site -->
-            <?php include_once('header.php'); ?>
+            
             <!-- Affichage des recettes si user est logged -->
             <?php if(isset($_SESSION['LOGGED_USER'])) : ?>
                
