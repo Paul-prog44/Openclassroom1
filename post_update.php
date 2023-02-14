@@ -1,18 +1,7 @@
 <?php
 session_start();
 
-try{
-    $database = new PDO('mysql:host=localhost;dbname=we_love_food;charset=utf8',    //Data Source Name
-                'root', //Identifiant
-                '',  //mot de passe
-                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );}
-    
-    catch (Exception $e)
-    
-    {
-        die('Erreur : '. $e->getMessage());
-    }
+include_once('connexionDB.php');
 
 if (empty($_POST['title']) || empty($_POST['recipe'])) {
     echo "Merci de remplir tous les champs pour soumettre une recette.";
@@ -20,16 +9,18 @@ if (empty($_POST['title']) || empty($_POST['recipe'])) {
 }
 $title = $_POST['title'];
 $recipe = $_POST['recipe'];
+$id = $_POST['id'];
 
 //modification en databse
 
 $recipeUpdate = $database->prepare('UPDATE recipes SET title = :title, recipe = :recipe WHERE recipe_id = :id');
 $recipeUpdate->execute([
-    'title' =>$title,
-    'recipe' =>$recipe,
+    'title' => $title,
+    'recipe' => $recipe,
     'id' => $id,
-])
-?>
+]);?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,6 +44,9 @@ $recipeUpdate->execute([
             
             <div class="card-body">
                 <h5 class="card-title">Rappel de votre recette :</h5>
-                <p class="card-text"><b>Titre</b> : <?php echo htmlspecialchars($_POST['title']); ?></p>
-                <p class="card-text"><b>Recette</b> : <?php echo htmlspecialchars($_POST['recipe']); ?></p>
+                <p class="card-text"><b>Titre</b> : <?php echo htmlspecialchars($title); ?></p>
+                <p class="card-text"><b>Recette</b> : <?php echo htmlspecialchars($recipe); ?></p>
             </div>
+
+
+    <?php include_once('footer.php')?>

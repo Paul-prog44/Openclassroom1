@@ -1,18 +1,6 @@
 <?php session_start(); // début de la session ?>
 
-<?php
-try{
-$database = new PDO('mysql:host=localhost;dbname=we_love_food;charset=utf8',    //Data Source Name
-            'root', //Identifiant
-            '',  //mot de passe
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-);}
-
-catch (Exception $e)
-
-{
-    die('Erreur : '. $e->getMessage());
-}
+<?php include_once('connexionDB.php');
 
 // On récupère tout le contenu de la table recipes
 $recipesStatement = $database->prepare('SELECT * FROM recipes');
@@ -60,12 +48,10 @@ $users = $usersdb->fetchAll();
                     <h3><?php echo $recipe['title']; ?></h3>
                    <div><?php echo $recipe['recipe']; ?></div>
                    <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
-                   <div>
-                   <form action="submit_contact.php" method="POST">
-                   <button type="button" class="btn btn-light">Modifier</button> 
-                   <button type="button" class="btn btn-danger">Supprimer</button> 
-                    </form>
-                    </div>
+                   <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item"><a class="link-warning" href="update.php?id=<?php echo($recipe['recipe_id']); ?>">Editer l'article</a></li>
+                        <li class="list-group-item"><a class="link-danger" href="./recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Supprimer l'article</a></li>  
+                    </ul>
                </article> 
                <?php endforeach ?>
         <?php endif; ?>
