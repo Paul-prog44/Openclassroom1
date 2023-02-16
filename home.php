@@ -50,7 +50,8 @@ $users = $usersdb->fetchAll();
                    <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
                    <ul class="list-group list-group-horizontal">
                         <li class="list-group-item"><a class="link-warning" href="update.php?id=<?php echo($recipe['recipe_id']); ?>">Editer l'article</a></li>
-                        <li class="list-group-item"><a class="link-danger" href="./recipes/delete.php?id=<?php echo($recipe['recipe_id']); ?>">Supprimer l'article</a></li>  
+                        <!--On passe l'id de recette dans la superglobal $_GET afin de pouvoir y avoir accès dans la page update-->
+                        <li class="list-group-item"><a class="link-danger" href="delete.php?id=<?php echo($recipe['recipe_id']); ?>">Supprimer l'article</a></li>  
                     </ul>
                </article> 
                <?php endforeach ?>
